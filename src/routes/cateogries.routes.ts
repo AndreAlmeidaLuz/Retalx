@@ -14,6 +14,7 @@ const upload = multer({
 
 //==========ROTA PARA CADASTRAR:=========//
 categoriesRoutes.post('/', (request, response) => {
+	console.log('reload on')
 	return createCategoryController.handlle(request, response)
 })
 
