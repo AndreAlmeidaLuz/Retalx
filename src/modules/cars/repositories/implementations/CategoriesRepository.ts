@@ -1,47 +1,38 @@
-import { Category } from '../../model/Category'
+import { Category } from '../../entities/Category'
 import {
 	ICategoriesRepository,
 	ICreateCategoryDTO,
 } from '../ICategoriesRepository'
 
+import { getRepository, Repository } from 'typeorm'
+
 class CategoriesRepository implements ICategoriesRepository {
-	//criando um array category do tipo Category que vem da classe Category
-	private categories: Category[]
+	private repository: Repository<Category>
 
-	private static INSTANCE: CategoriesRepository
-
-	private constructor() {
-		this.categories = []
-	}
-
-	public static getInstance(): CategoriesRepository {
-		if (!CategoriesRepository.INSTANCE) {
-			CategoriesRepository.INSTANCE = new CategoriesRepository()
-		}
-		return CategoriesRepository.INSTANCE
+	constructor() {
+		this.repository = getRepository(Category)
 	}
 
 	//criando uma funcao create, onde são passados os valores que serão cadastrados
-	create({ name, description }: ICreateCategoryDTO): void {
-		const category = new Category()
-		category.name = name
-		category.description = description
-		category.created_at = new Date()
+	async create({ name, description }: ICreateCategoryDTO): Promise<void> {
+		const category = this.repository.create({
+			description,
+			name,
+		})
 
-		//adicionando os valores passados para dentro do array category
-		this.categories.push(category)
+		//salvar dados da categoria
+		await this.repository.save(category)
 	}
 
 	//listando  os dados: o metodo list tem as caracteristicas da classe Category e retorna os dados cadastrados no arrar categories
-	list(): Category[] {
-		return this.categories
+	async list(): Promise<Category[]> {
+		const categories = await this.repository.find()
+		return categories
 	}
 
 	//Regra de negocio: verificando se já existe uma categoria cadastrada
-	findByName(name: string) {
-		const categoryExists = this.categories.find(
-			(category) => category.name === name,
-		)
+	async findByName(name: string): Promise<Category> {
+		const categoryExists = await this.repository.findOne({ name })
 		return categoryExists
 	}
 }
