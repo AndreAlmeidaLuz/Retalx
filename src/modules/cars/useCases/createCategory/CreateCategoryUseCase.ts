@@ -1,3 +1,5 @@
+import { inject, injectable } from 'tsyringe'
+import { AppError } from '../../../../errors/AppError'
 import { ICategoriesRepository } from '../../repositories/ICategoriesRepository'
 
 interface IRequest {
@@ -5,8 +7,12 @@ interface IRequest {
 	description: string
 }
 
+@injectable()
 class CreateCategoryUseCase {
-	constructor(private categoriesRepository: ICategoriesRepository) {}
+	constructor(
+		@inject('CategoriesRepository')
+		private categoriesRepository: ICategoriesRepository,
+	) {}
 
 	async execute({ name, description }: IRequest): Promise<void> {
 		//chamadno o metodo findByName dentro  da classe CategoriesRepository:
@@ -15,7 +21,7 @@ class CreateCategoryUseCase {
 
 		//se existir uma categoria já cadastrada ele informa um erro e não permite o cadastro novamente
 		if (categoryAlreadyExists) {
-			throw new Error('Category Already exists!')
+			throw new AppError('Category Already exists!')
 		}
 
 		//chamando a funcao create que está dentro da classe CategoriesRepository e puxando os valores passados do corpo da requisicao:

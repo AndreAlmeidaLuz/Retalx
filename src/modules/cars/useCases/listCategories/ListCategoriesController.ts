@@ -1,12 +1,13 @@
 import { Request, Response } from 'express'
 import { ListCategoriesUseCase } from './ListCategoriesUseCase'
+import { container } from 'tsyringe'
 
 class ListCategoriesController {
-	//criando construtor pára chamar a classe CreateCategoryUseCase
-	constructor(private listCategoryUseCase: ListCategoriesUseCase) {}
-	handle(request: Request, response: Response): Response {
+	async handle(request: Request, response: Response): Promise<Response> {
+		const listCategoryUseCase = container.resolve(ListCategoriesUseCase)
+
 		//chamando o metodo que lista as categorias cadastradas:
-		const all = this.listCategoryUseCase.execute()
+		const all = await listCategoryUseCase.execute()
 
 		return response.status(201).json(all)
 	}

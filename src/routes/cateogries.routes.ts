@@ -1,9 +1,9 @@
 import { Router } from 'express'
 import multer from 'multer'
 
-import { listCategoriesController } from '../modules/cars/useCases/listCategories'
-import createCategoryController from '../modules/cars/useCases/createCategory'
-import { importCategoryController } from '../modules/cars/useCases/importCategory'
+import { CreateCategoryController } from '../modules/cars/useCases/createCategory/CreateCategoryController'
+import { ListCategoriesController } from '../modules/cars/useCases/listCategories/ListCategoriesController'
+import { ImportCategoryController } from '../modules/cars/useCases/importCategory/importCategoryController'
 
 const categoriesRoutes = Router()
 
@@ -12,20 +12,21 @@ const upload = multer({
 	dest: './tmp', //informando qual será o destino/pasta
 })
 
+const createCategoryController = new CreateCategoryController()
+const importCategoryController = new ImportCategoryController()
+const listCategoriesController = new ListCategoriesController()
+
 //==========ROTA PARA CADASTRAR:=========//
-categoriesRoutes.post('/', (request, response) => {
-	console.log('reload on')
-	return createCategoryController().handlle(request, response)
-})
+categoriesRoutes.post('/', createCategoryController.handlle)
 
 //==========ROTA PARA LISTAR:=========//
-categoriesRoutes.get('/', (request, response) => {
-	return listCategoriesController.handle(request, response)
-})
+categoriesRoutes.get('/', listCategoriesController.handle)
 
 //==========ROTA PARA IMPORTAR ARQUIVOS:=========//
-categoriesRoutes.post('/import', upload.single('file'), (request, response) => {
-	return importCategoryController.handle(request, response)
-})
+categoriesRoutes.post(
+	'/import',
+	upload.single('file'),
+	importCategoryController.handle,
+)
 
 export { categoriesRoutes }
