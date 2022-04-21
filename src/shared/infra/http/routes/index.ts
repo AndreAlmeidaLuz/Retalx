@@ -3,6 +3,7 @@ import { authenticateRoutes } from './authenticate.routes'
 import { categoriesRoutes } from './cateogries.routes'
 import { specificationsRoutes } from './specifications.routes'
 import { usersRoutes } from './users.routes'
+import { carsRoutes } from './car.routes'
 
 const router = Router()
 
@@ -12,6 +13,8 @@ router.use('/categories', categoriesRoutes)
 router.use('/specifications', specificationsRoutes)
 //chamando a rota 'usersRoutes
 router.use('/users', usersRoutes)
+//chamando a rota de cars
+router.use('/cars', usersRoutes)
 //chamando a rota de autenticacao
 router.use(authenticateRoutes)
 
