@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\André Almeida\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add dayjs
+  C:\Program Files\nodejs\node.exe C:\Users\André Almeida\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add supertest @types/supertest -D
 
 PATH: 
   C:\Users\André Almeida\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\André Almeida\bin;C:\Users\André Almeida\Downloads\jdk-17_windows-x64_bin\jdk-17.0.2\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\xampp\php;C:\composer;C:\Program Files\Git\cmd;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\nodejs;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\André Almeida\AppData\Local\Microsoft\WindowsApps;C:\Users\André Almeida\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\André Almeida\AppData\Roaming\Composer\vendor\bin;C:\Users\André Almeida\AppData\Roaming\npm;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
@@ -26,11 +26,12 @@ npm manifest:
       "dev": "ts-node-dev -r tsconfig-paths/register --poll --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
       "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli",
       "test": "jest",
-      "seed:admin":"ts-node-dev src/shared/infra/typeorm/seed/admin.ts"
+      "seed:admin": "ts-node-dev src/shared/infra/typeorm/seed/admin.ts"
     },
     "dependencies": {
       "bcryptjs": "^2.4.3",
       "csv-parse": "^5.0.4",
+      "dayjs": "^1.11.2",
       "express": "^4.17.3",
       "express-async-errors": "^3.1.1",
       "jsonwebtoken": "^8.5.1",
@@ -1311,6 +1312,11 @@ Lockfile:
       abab "^2.0.3"
       whatwg-mimetype "^2.3.0"
       whatwg-url "^8.0.0"
+  
+  dayjs@^1.11.2:
+    version "1.11.2"
+    resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.2.tgz#fa0f5223ef0d6724b3d8327134890cfe3d72fbe5"
+    integrity sha512-F4LXf1OeU9hrSYRPTTj/6FbO4HTjPKXvEIC1P2kcnFurViINCVk3ZV0xAS3XVx9MkMsXbbqlK6hjseaYbgKEHw==
   
   debug@2.6.9:
     version "2.6.9"

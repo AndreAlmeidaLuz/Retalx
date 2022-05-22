@@ -19,7 +19,7 @@ class RentalsRepository implements IRentalsRepository {
 		return openByUser
 	}
 
-	create({
+	async create({
 		car_id,
 		expected_return_date,
 		user_id,
